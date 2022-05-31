@@ -8,20 +8,20 @@ const loader = document.getElementById("loader");
 let apiQuotes = [];
 
 // Show loading
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-// Hide loading
-function complete() {
+// Hide showLoadingSpinner
+function removeLoadingSpinner() {
     loader.hidden = true;
     quoteContainer.hidden = false;
 }
 
 // Show new quote
 function newQuote() {
-    loading();
+    showLoadingSpinner();
     //  Pick a a random quote from apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * Math.floor(apiQuotes.length))];
     //  Check if Autho field is blank and replace it with "Unknown"
@@ -38,12 +38,12 @@ function newQuote() {
     }
     // Set quote and hide loader
     quoteText.textContent = quote.text;
-    complete();
+    removeLoadingSpinner();
 }
 
 // Get quotes from API
 async function getQuotes() {
-    loading();
+    showLoadingSpinner();
     const apiURL = "https://type.fit/api/quotes";
     try {
         const response = await fetch(apiURL);
